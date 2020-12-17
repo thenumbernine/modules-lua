@@ -1,7 +1,8 @@
 local class = require 'ext.class'
 local table = require 'ext.table'
 local string = require 'ext.string'
-local Module = require 'hydro.code.module'
+local range = require 'ext.range'
+local Module = require 'modules.module'
 
 --[[
 in some ways I could reproduce this behavior with a bunch of #includes
@@ -16,6 +17,9 @@ or i could just write this module system.
 
 local ModuleSet = class()
 
+-- set this for some extra debug info
+--ModuleSet.verbose = nil
+
 function ModuleSet:init(...)
 	self.set = {}
 	-- copy any into it on ctor
@@ -26,7 +30,6 @@ function ModuleSet:init(...)
 			self.set[k] = v
 		end
 	end
-	self.verbose = cmdline.moduleVerbose
 end
 
 -- during init, building modules, do this:
@@ -50,7 +53,6 @@ if self.verbose then
 	print('building:')
 end	
 	local function add(name, from, indent, last)
-		local range = require 'ext.range'
 		indent = indent or ''
 		local indentlen = #indent
 		
