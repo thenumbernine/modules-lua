@@ -48,7 +48,9 @@ If you want to insert type code, header code, or body code into your markup, you
 From there, code is requested and generated using the following API:
 
 `modules:getTypeHeader(<mod1>, <mod2>, ...)` = returns typecode + structs
+
 `modules:getHeader(<mod1>, <mod2>, ...)` = returns typecode + structs + header
+
 `modules:getCodeAndHeader(<mod1>, <mod2>, ...)` = returns typecode + structs + header + code
 
 Another useful function:
