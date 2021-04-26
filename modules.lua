@@ -275,7 +275,10 @@ function ModuleSet:addFromMarkup(args)
 		else
 			local deps = line:match'^//// MODULE_DEPENDS: (.*)'
 			if deps then
-				depends:append(string.split(string.trim(deps), ' '))
+				deps = string.split(string.trim(deps), ' ')
+				if not (#deps == 1 and deps[1] == '') then
+					depends:append(deps)
+				end
 			else
 				if string.trim(line) == '//// MODULE_CODE:' then
 					lineTarget = 'code'
