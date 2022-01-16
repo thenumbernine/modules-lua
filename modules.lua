@@ -25,7 +25,7 @@ function ModuleSet:init(...)
 	-- copy any into it on ctor
 	for i=1,select('#', ...) do
 		local set = select(i, ...)
-		assert(ModuleSet.is(set))
+		assert(ModuleSet:isa(set))
 		for k,v in pairs(set.set) do
 			self.set[k] = v
 		end
