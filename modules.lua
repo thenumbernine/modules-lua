@@ -51,7 +51,7 @@ function ModuleSet:getDependentModules(...)
 	local added = table()
 if self.verbose then
 	print('building:')
-end	
+end
 	local function add(name, from, indent, last)
 		indent = indent or ''
 		local indentlen = #indent
@@ -68,9 +68,20 @@ end
 				)
 			end
 			addedkeys[name] = true
+--[[ filter uses pairs (at the moment)
+-- and pairs doesn't guarantee order
+-- and I want the order to be determinable (for the sake of caching code)
 			deps = module.depends:filter(function(dep)
 				return not addedkeys[dep]
 			end)
+--]]
+-- [[ so instead ... (how come I can't reproduce the old behavior anymore?)
+			deps = module.depends:mapi(function(dep,_,t)
+				if not addedkeys[dep] then
+					return dep, #t+1
+				end
+			end)
+--]]
 		end
 		local numdeps = deps and #deps or 0
 		
@@ -92,9 +103,9 @@ end
 			end
 			added:insert(module)
 		end
-if self.verbose then	
+if self.verbose then
 	print(str)
-end	
+end
 	end
 	local numModules = select('#', ...)
 	for i=1,numModules do
@@ -205,10 +216,10 @@ add using the following markup:
 //// MODULE_CODE:
 (code)
 
-//// MODULE_HEADER: 
+//// MODULE_HEADER:
 (header)
 
-//// MODULE_TYPE: 
+//// MODULE_TYPE:
 (type)
 
 args:
