@@ -107,9 +107,7 @@ if self.verbose then
 	print(str)
 end
 	end
-	local numModules = select('#', ...)
-	for i=1,numModules do
-		local name = select(i, ...)
+	for _,name in ipairs(table{...}:sort()) do
 		add(name, nil, ' ', i == 1)
 	end
 if self.verbose	then
