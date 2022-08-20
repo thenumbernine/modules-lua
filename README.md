@@ -1,3 +1,5 @@
+[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=KYWUWS86GSFGL)
+
 Module system, for chopping up and reassembling code.
 This forms a DAG of each module within the code, then when requested, it returns only what modules are necessary, in corret dependency order.
 API:
