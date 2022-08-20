@@ -4,7 +4,7 @@ Module system, for chopping up and reassembling code.
 This forms a DAG of each module within the code, then when requested, it returns only what modules are necessary, in corret dependency order.
 
 I made this after my OpenCL GPU simulation code was getting so large that the build times on it were climbing into the minutes realm.  I realized the CL compiler I was using wasn't so tuned for time, and that it was compiling every function regardless of whether it was being used or not.
-So I made this tool and reduce the time by a factor of 100x or so, from minutes to seconds.
+So I made this tool and reduce the time by a factor of 100x or so, from minutes to seconds.  I use it pretty extensively in my [Hydrodynamics in OpenCL and LuaJIT](https://github.com/thenumbernine/hydro-cl-lua) project.
 
 API:
 
