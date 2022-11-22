@@ -220,6 +220,18 @@ add using the following markup:
 //// MODULE_TYPE:
 (type)
 
+
+TODO well what about single-line or combined multiline \'s into single-lines (esp in macros)
+one hack within the current format/framework is just have an open-block-comment on the previous line, and a close-block-comment on the next line
+ex:
+	line1;\
+	line2;\
+	/*
+	//// MODULE_whatever
+	*/ line3;\
+	etc
+
+
 args:
 	code
 	onAdd = function(moduleArgs)
