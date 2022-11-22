@@ -206,7 +206,7 @@ function ModuleSet:getCodeAndHeader(...)
 	return lines:concat'\n'
 end
 
---[[
+--[=[
 add using the following markup:
 //// MODULE_NAME: (name)
 //// MODULE_DEPENDS: space-separated-dependencies
@@ -222,20 +222,15 @@ add using the following markup:
 
 
 TODO well what about single-line or combined multiline \'s into single-lines (esp in macros)
-one hack within the current format/framework is just have an open-block-comment on the previous line, and a close-block-comment on the next line
-ex:
-	line1;\
-	line2;\
-	/*
-	//// MODULE_whatever
-	*/ line3;\
-	etc
-
+ok new proposal: 
+	{{{{ MODULE_*: * }}}
+then be sure to put it in whatever comment (block, newline, etc) you would like.
+TODO still havent implemented this
 
 args:
 	code
 	onAdd = function(moduleArgs)
---]]
+--]=]
 function ModuleSet:addFromMarkup(args)
 	if type(args) == 'string' then args = {code = args} end
 
@@ -288,6 +283,18 @@ function ModuleSet:addFromMarkup(args)
 		resetState()
 	end
 	for _,line in ipairs(srcLines) do
+		-- new inline method
+		local depi, depj = line:find'{{{{ MODULE_DEPENDS:.*}}}}'
+		if depi then
+			local deps = line:sub(depi, depj)
+			line = line:sub(1, depi-1)..line:sub(depj+1)
+			deps = deps:match'^{{{{ MODULE_DEPENDS: (.*) }}}}$'
+			deps = string.split(string.trim(deps), ' ')
+			if not (#deps == 1 and deps[1] == '') then
+				depends:append(deps)
+			end
+		end
+
 		local readname = line:match'^//// MODULE_NAME: (.*)'
 		if readname then
 			makeModule()

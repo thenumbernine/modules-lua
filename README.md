@@ -52,6 +52,11 @@ If you want to insert type code, header code, or body code into your markup, you
 
 ```
 
+Ok for inlined code and multiline/macro code I added in this option too: 
+```
+{{{{ MODULE_DEPENDS: <dep1> <dep2> ... }}}}
+```
+
 From there, code is requested and generated using the following API:
 
 `modules:getTypeHeader(<mod1>, <mod2>, ...)` = returns typecode + structs
