@@ -25,6 +25,15 @@ modules:add{
 
 The `structs` arg, and struct objects, are not yet in the repo, so don't worry about them.
 
+You can also add from markup:
+
+```
+modules:addFromMarkup{
+	code=[[...]],
+	onAdd = function(moduleArgs) ... end,
+}
+```
+
 Using markup:
 
 ```
