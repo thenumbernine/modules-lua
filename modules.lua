@@ -55,7 +55,7 @@ end
 	local function add(name, from, indent, last)
 		indent = indent or ''
 		local indentlen = #indent
-		
+
 		local module, deps
 		if not addedkeys[name] then
 			module = self.set[name]
@@ -84,7 +84,7 @@ end
 --]]
 		end
 		local numdeps = deps and #deps or 0
-		
+
 		local str = range(indentlen):mapi(function(i)
 			if i < indentlen then
 				return '│'
@@ -93,7 +93,7 @@ end
 		end):concat()
 			..(numdeps > 0 and '┴' or '─')	-- ┬
 			..'─> '..name
-		
+
 		-- don't include twice
 		if module then
 			assert(addedkeys[name])
@@ -107,7 +107,7 @@ if self.verbose then
 	print(str)
 end
 	end
-	for _,name in ipairs(table{...}:sort()) do
+	for i,name in ipairs(table{...}:sort()) do
 		add(name, nil, ' ', i == 1)
 	end
 if self.verbose	then
@@ -163,7 +163,7 @@ function ModuleSet:getHeader(...)
 		if type(module.headercode) == 'function' then
 			module.headercode = module.headercode()
 		end
-		
+
 		lines:insert(comment(module.headercode, module.name, 'headercode') or nil)
 	end
 	return lines:concat'\n'
@@ -200,7 +200,7 @@ function ModuleSet:getCodeAndHeader(...)
 		if type(module.code) == 'function' then
 			module.code = module.code()
 		end
-		
+
 		lines:insert(comment(module.code, module.name, 'code') or nil)
 	end
 	return lines:concat'\n'
@@ -222,7 +222,7 @@ add using the following markup:
 
 
 TODO well what about single-line or combined multiline \'s into single-lines (esp in macros)
-ok new proposal: 
+ok new proposal:
 	{{{{ MODULE_*: * }}}
 then be sure to put it in whatever comment (block, newline, etc) you would like.
 TODO still havent implemented this
@@ -237,7 +237,7 @@ function ModuleSet:addFromMarkup(args)
 	local srcLines = string.split(args.code, '\n')
 
 	local name, dstLines, lineTarget, depends
-	
+
 	local function resetState()
 		name = nil
 		dstLines = {
@@ -279,7 +279,7 @@ function ModuleSet:addFromMarkup(args)
 				end
 			end
 		end
-	
+
 		resetState()
 	end
 	for _,line in ipairs(srcLines) do
