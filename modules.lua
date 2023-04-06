@@ -283,6 +283,18 @@ function ModuleSet:addFromMarkup(args)
 		resetState()
 	end
 	for _,line in ipairs(srcLines) do
+		-- new new inline method -- don't even use markup
+		if self.ambitious then
+			for dep in line:gmatch'%w[_%w]*' do
+				-- only add if the module exists
+				-- TODO this means d.a.g. modules must be defined in order of dependency
+				-- that's not the case for the other depends methods.
+				if self.set[dep] then
+					depends:insert(dep)
+				end
+			end
+		end
+
 		-- new inline method
 		local depi, depj = line:find'{{{{ MODULE_DEPENDS:.*}}}}'
 		if depi then

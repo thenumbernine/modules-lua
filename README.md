@@ -61,10 +61,13 @@ If you want to insert type code, header code, or body code into your markup, you
 
 ```
 
-Ok for inlined code and multiline/macro code I added in this option too: 
+For inlined comments/code and multiline/macro code I added in this option too: 
 ```
 {{{{ MODULE_DEPENDS: <dep1> <dep2> ... }}}}
 ```
+
+For the truly lazy, you can just set `modules.ambitious = true` and it will just add any module dependencies from any symbols it finds that match previously-defined module names.
+
 
 From there, code is requested and generated using the following API:
 
