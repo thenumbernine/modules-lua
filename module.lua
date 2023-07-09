@@ -45,8 +45,10 @@ function Module:init(args)
 	-- special for structs - add all its types as dependencies
 	for _,struct in ipairs(self.structs) do
 		for _,var in ipairs(struct.vars) do
-			if not predefinedStructTypes[var.type] then
-				self.depends:insertUnique(var.type)
+			local ctype = var.type
+			ctype = ctype:match('(.-)%[') or ctype
+			if not predefinedStructTypes[ctype] then
+				self.depends:insertUnique(ctype)
 			end
 		end
 	end
