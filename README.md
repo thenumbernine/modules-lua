@@ -9,7 +9,7 @@ So I made this tool and reduce the time by a factor of 100x or so, from minutes 
 
 API:
 
-```
+``` Lua
 local Modules = require 'modules'
 local modules = Modules()
 
@@ -27,7 +27,7 @@ The `structs` arg, and struct objects, are not yet in the repo, so don't worry a
 
 You can also add from markup:
 
-```
+``` Lua
 modules:addFromMarkup{
 	code=[[...]],
 	onAdd = function(moduleArgs) ... end,
@@ -36,7 +36,7 @@ modules:addFromMarkup{
 
 Using markup:
 
-```
+``` c
 //// MODULE_NAME: <name>
 //// MODULE_DEPENDS: <dep1> <dep2> ...
 ```
@@ -46,7 +46,7 @@ Every `MODULE_NAME` macro defines the start of a new module in the markup.
 Names cannot have spaces in them, dependency markup is space-separated.
 If you want to insert type code, header code, or body code into your markup, you can distinguish each like so:
 
-```
+``` c
 //// MODULE_TYPE:
 
 <type code> ...
@@ -62,7 +62,7 @@ If you want to insert type code, header code, or body code into your markup, you
 ```
 
 For inlined comments/code and multiline/macro code I added in this option too: 
-```
+``` c
 {{{{ MODULE_DEPENDS: <dep1> <dep2> ... }}}}
 ```
 
