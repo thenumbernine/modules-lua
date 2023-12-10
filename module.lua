@@ -44,8 +44,7 @@ function Module:init(args)
 	self.code = args.code or ''
 	-- special for structs - add all its types as dependencies
 	for _,struct in ipairs(self.structs) do
-		for _,field in ipairs(struct.fields) do
-			local ctype = field.type
+		for _,ctype,field in struct:fielditer() do
 			ctype = ctype:match('(.-)%[') or ctype
 			if not predefinedStructTypes[ctype] then
 				self.depends:insertUnique(ctype)
