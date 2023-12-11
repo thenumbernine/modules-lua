@@ -131,9 +131,6 @@ function ModuleSet:getTypeHeader(...)
 		lines:insert(comment(table{
 				module.typecode
 			}:append(module.structs:mapi(function(struct)
-				-- this needs makeType() called first, which generates the .typecode
-				-- but it also calls the ffi.metatype (which can only be done once)
-				-- and also the ffi.cdef (which is only effective the first time it's done)
 				return struct.code
 			end)):concat'\n', module.name, 'typecode & structs'
 		) or nil)
@@ -150,9 +147,6 @@ function ModuleSet:getHeader(...)
 		lines:insert(comment(table{
 				module.typecode
 			}:append(module.structs:mapi(function(struct)
-				-- this needs makeType() called first, which generates the .typecode
-				-- but it also calls the ffi.metatype (which can only be done once)
-				-- and also the ffi.cdef (which is only effective the first time it's done)
 				return struct.code
 			end)):concat'\n', module.name, 'typecode & structs'
 		) or nil)
@@ -178,9 +172,6 @@ function ModuleSet:getCodeAndHeader(...)
 		lines:insert(comment(table{
 				module.typecode
 			}:append(module.structs:mapi(function(struct)
-				-- this needs makeType() called first, which generates the .typecode
-				-- but it also calls the ffi.metatype (which can only be done once)
-				-- and also the ffi.cdef (which is only effective the first time it's done)
 				return struct.code
 			end)):concat'\n', module.name, 'typecode & structs'
 		) or nil)

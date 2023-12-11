@@ -23,7 +23,7 @@ modules:add{
 }
 ```
 
-The `structs` arg, and struct objects, are not yet in the repo, so don't worry about them.
+The `structs` arg, and struct objects, are structs from my `struct-lua` repo.
 
 You can also add from markup:
 
