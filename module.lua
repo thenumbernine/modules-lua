@@ -45,6 +45,7 @@ function Module:init(args)
 	-- special for structs - add all its types as dependencies
 	for _,struct in ipairs(self.structs) do
 		for _,ctype,field in struct:fielditer() do
+			-- TODO store this in .fields construction in struct's `newStruct` ... along with storing bits and array size
 			ctype = ctype:match('(.-)%[') or ctype
 			if not predefinedStructTypes[ctype] then
 				self.depends:insertUnique(ctype)
