@@ -42,6 +42,7 @@ function ModuleSet:add(args)
 			.."originally added from "..self.set[module.name].traceback)
 	end
 	self.set[module.name] = module
+	return module
 end
 
 -- during init, generating code, do this:
