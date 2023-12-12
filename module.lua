@@ -26,6 +26,8 @@ local predefinedStructTypes = {
 	int = true,
 	int2 = true,
 	int4 = true,
+	float = true,
+	double = true,
 }
 
 function Module:init(args)
