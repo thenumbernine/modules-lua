@@ -129,8 +129,12 @@ function ModuleSet:getTypeHeader(...)
 	local lines = table()
 	-- typecode & structs
 	for _,module in ipairs(deps) do
+		local typecode = module.typecode
+		if type(typecode) == 'function' then
+			typecode = typecode()
+		end
 		lines:insert(comment(table{
-				module.typecode
+				typecode
 			}:append(module.structs:mapi(function(struct)
 				return struct.code
 			end)):concat'\n', module.name, 'typecode & structs'
@@ -145,8 +149,12 @@ function ModuleSet:getHeader(...)
 	local lines = table()
 	-- typecode & structs
 	for _,module in ipairs(deps) do
+		local typecode = module.typecode
+		if type(typecode) == 'function' then
+			typecode = typecode()
+		end
 		lines:insert(comment(table{
-				module.typecode
+				typecode
 			}:append(module.structs:mapi(function(struct)
 				return struct.code
 			end)):concat'\n', module.name, 'typecode & structs'
@@ -159,7 +167,6 @@ function ModuleSet:getHeader(...)
 		if type(headercode) == 'function' then
 			headercode = headercode()
 		end
-
 		lines:insert(comment(headercode, module.name, 'headercode') or nil)
 	end
 	return lines:concat'\n'
@@ -171,8 +178,12 @@ function ModuleSet:getCodeAndHeader(...)
 	local lines = table()
 	-- typecode & structs
 	for _,module in ipairs(deps) do
+		local typecode = module.typecode
+		if type(typecode) == 'function' then
+			typecode = typecode()
+		end
 		lines:insert(comment(table{
-				module.typecode
+				typecode
 			}:append(module.structs:mapi(function(struct)
 				return struct.code
 			end)):concat'\n', module.name, 'typecode & structs'
@@ -195,7 +206,6 @@ function ModuleSet:getCodeAndHeader(...)
 		if type(code) == 'function' then
 			code = code()
 		end
-
 		lines:insert(comment(code, module.name, 'code') or nil)
 	end
 	return lines:concat'\n'
