@@ -17,6 +17,13 @@ or i could just write this module system.
 
 local ModuleSet = class()
 
+-- hmmmmm
+-- I want to make this work with struct-lua
+-- and struct-lua has .code (for luajit ffi cdef / C) and .cppcode (for cpp / clcpp)
+-- so ... how to switch between the two?
+-- for now, it is with this flag:
+ModuleSet.cpp = false
+
 -- set this for some extra debug info
 --ModuleSet.verbose = nil
 
@@ -136,7 +143,7 @@ function ModuleSet:getTypeHeader(...)
 		lines:insert(comment(table{
 				typecode
 			}:append(module.structs:mapi(function(struct)
-				return struct.code
+				return self.cpp and struct.cppcode or struct.code
 			end)):concat'\n', module.name, 'typecode & structs'
 		) or nil)
 	end
@@ -156,7 +163,7 @@ function ModuleSet:getHeader(...)
 		lines:insert(comment(table{
 				typecode
 			}:append(module.structs:mapi(function(struct)
-				return struct.code
+				return self.cpp and struct.cppcode or struct.code
 			end)):concat'\n', module.name, 'typecode & structs'
 		) or nil)
 	end
@@ -185,7 +192,7 @@ function ModuleSet:getCodeAndHeader(...)
 		lines:insert(comment(table{
 				typecode
 			}:append(module.structs:mapi(function(struct)
-				return struct.code
+				return self.cpp and struct.cppcode or struct.code
 			end)):concat'\n', module.name, 'typecode & structs'
 		) or nil)
 	end
