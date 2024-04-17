@@ -58,6 +58,8 @@ function ModuleSet:getDependentModules(...)
 	local addedkeys = {}
 	local added = table()
 if self.verbose then
+	print()
+	print(debug.traceback())
 	print('building:')
 end
 	local function add(name, from, indent, last)
