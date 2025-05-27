@@ -54,9 +54,7 @@ function Module:init(args)
 			end
 		end
 	end
-if args.verbose then
-	print(require 'ext.tolua'(self))
-end
+--DEBUG:print(require 'ext.tolua'(self))
 end
 
 return Module

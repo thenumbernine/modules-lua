@@ -24,9 +24,6 @@ local ModuleSet = class()
 -- for now, it is with this flag:
 ModuleSet.cpp = false
 
--- set this for some extra debug info
---ModuleSet.verbose = nil
-
 function ModuleSet:init(...)
 	self.set = {}
 	-- copy any into it on ctor
@@ -57,14 +54,12 @@ end
 function ModuleSet:getDependentModules(...)
 	local addedkeys = {}
 	local added = table()
-if self.verbose then
-	print()
-	print(debug.traceback())
-	print('building:')
-end
+--DEBUG:print()
+--DEBUG:print(debug.traceback())
+--DEBUG:print('building:')
 	local function add(name, from, indent, last)
 		indent = indent or ''
-		local indentlen = #indent
+--DEBUG:local indentlen = #indent
 
 		local module, deps
 		if not addedkeys[name] then
@@ -95,14 +90,14 @@ end
 		end
 		local numdeps = deps and #deps or 0
 
-		local str = range(indentlen):mapi(function(i)
-			if i < indentlen then
-				return '│'
-			end
-			return last and '┌' or '├'	-- └
-		end):concat()
-			..(numdeps > 0 and '┴' or '─')	-- ┬
-			..'─> '..name
+--DEBUG:local str = range(indentlen):mapi(function(i)
+--DEBUG:	if i < indentlen then
+--DEBUG:		return '│'
+--DEBUG:	end
+--DEBUG:	return last and '┌' or '├'	-- └
+--DEBUG:end):concat()
+--DEBUG:	..(numdeps > 0 and '┴' or '─')	-- ┬
+--DEBUG:	..'─> '..name
 
 		-- don't include twice
 		if module then
@@ -113,16 +108,12 @@ end
 			end
 			added:insert(module)
 		end
-if self.verbose then
-	print(str)
-end
+--DEBUG:print(str)
 	end
 	for i,name in ipairs(table{...}:sort()) do
 		add(name, nil, ' ', i == 1)
 	end
-if self.verbose	then
-	print()
-end
+--DEBUG:print()
 	return added
 end
 
