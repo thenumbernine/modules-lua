@@ -1,9 +1,14 @@
+--------------------------------------------
+-- generated with dist/build-distinfo.rua --
+--------------------------------------------
+
 name = "modules"
 files = {
-	["README.md"] = "modules/README.md",
-	["module.lua"] = "modules/module.lua",
-	["modules-dev-1.rockspec"] = "modules/modules-dev-1.rockspec",
-	["modules.lua"] = "modules/modules.lua",
+	"README.md",
+	"distinfo",
+	"module.lua",
+	"modules-dev-1.rockspec",
+	"modules.lua",
 }
 deps = {
 	"ext",
