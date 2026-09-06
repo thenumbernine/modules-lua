@@ -76,7 +76,7 @@ function ModuleSet:getDependentModules(...)
 --[[ filter uses pairs (at the moment)
 -- and pairs doesn't guarantee order
 -- and I want the order to be determinable (for the sake of caching code)
-			deps = module.depends:filter(function(dep)
+			deps = module.depends:filteri(function(dep)
 				return not addedkeys[dep]
 			end)
 --]]
